@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "users")
+@Table(name = "developers")
 public class DeveloperEntity {
 
     @Id
@@ -28,7 +28,7 @@ public class DeveloperEntity {
     private String email;
 
     @ElementCollection
-    @CollectionTable(name = "user_tech_stack", joinColumns = @JoinColumn(name = "dev_id"))
+    @CollectionTable(name = "user_tech_stack", joinColumns = @JoinColumn(name = "id"))
     @Column(name = "technology")
     private List<String> techStack;
 }
