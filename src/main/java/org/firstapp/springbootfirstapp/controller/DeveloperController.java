@@ -16,14 +16,20 @@ public class DeveloperController {
 
     private final DeveloperService developerService;
 
-    @PostMapping
+    @PostMapping("/addDeveloper")
     public ResponseEntity<DeveloperEntity> createDeveloper(@RequestBody DeveloperEntity developer) {
         DeveloperEntity saved = developerService.saveDeveloper(developer);
         return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
-    @GetMapping
+    @GetMapping("/getAllDevelopers")
     public ResponseEntity<List<DeveloperEntity>> getAllDevelopers() {
         return ResponseEntity.ok(developerService.getAllDevelopers());
+    }
+
+    @GetMapping("/getById/{id}")
+    public ResponseEntity<DeveloperEntity> getDeveloperById(@PathVariable String id) {
+        DeveloperEntity developer = developerService.getDeveloperById(id);
+        return ResponseEntity.ok(developer);
     }
 }

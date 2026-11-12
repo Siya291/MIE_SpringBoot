@@ -20,4 +20,9 @@ public class DeveloperService {
     public List<DeveloperEntity> getAllDevelopers() {
         return developerRepository.findAll();
     }
+
+    public DeveloperEntity getDeveloperById(String id) {
+        return developerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Developer not found with id: " + id));
+    }
 }
