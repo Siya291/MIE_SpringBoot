@@ -32,4 +32,10 @@ public class DeveloperController {
         DeveloperEntity developer = developerService.getDeveloperById(id);
         return ResponseEntity.ok(developer);
     }
+
+    @DeleteMapping("/deleteByID/{id}")
+    public String deleteDeveloperById(@PathVariable String id) {
+        developerService.deleteDeveloperById(id);
+        return "Developer deleted successfully with id: " + id;
+    }
 }

@@ -25,4 +25,9 @@ public class DeveloperService {
         return developerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Developer not found with id: " + id));
     }
+
+    public void deleteDeveloperById(String id) {
+        DeveloperEntity developer = getDeveloperById(id);
+        developerRepository.delete(developer);
+    }
 }
