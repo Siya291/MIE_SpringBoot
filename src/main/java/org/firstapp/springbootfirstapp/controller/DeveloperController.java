@@ -38,4 +38,11 @@ public class DeveloperController {
         developerService.deleteDeveloperById(id);
         return "Developer deleted successfully with id: " + id;
     }
+
+    @PatchMapping("/update/{id}")
+    public ResponseEntity<DeveloperEntity> patchDeveloper(@PathVariable String id, @RequestBody DeveloperEntity partialDetails) {
+
+        DeveloperEntity updatedDeveloper = developerService.patchDeveloper(id, partialDetails);
+        return ResponseEntity.ok(updatedDeveloper);
+    }
 }

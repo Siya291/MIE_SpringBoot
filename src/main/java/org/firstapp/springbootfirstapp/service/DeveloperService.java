@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.firstapp.springbootfirstapp.model.DeveloperEntity;
 import org.firstapp.springbootfirstapp.repository.DeveloperRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,4 +31,25 @@ public class DeveloperService {
         DeveloperEntity developer = getDeveloperById(id);
         developerRepository.delete(developer);
     }
+
+    @Transactional
+    public DeveloperEntity patchDeveloper(String id, DeveloperEntity detailToChange) {
+        DeveloperEntity existingDev = getDeveloperById(id);
+
+        if (detailToChange.getName() != null && !detailToChange.getName().isBlank()) {
+            existingDev.setName(detailToChange.getName());
+        }
+
+        if (detailToChange.getEmail() != null && !detailToChange.getEmail().isBlank()) {
+            existingDev.setEmail(detailToChange.getEmail());
+        }
+
+        if (detailToChange.getTechStack() != null) {
+            existingDev.getTechStack().clear();
+            existingDev.getTechStack().addAll(detailToChange.getTechStack());
+        }
+
+        return developerRepository.save(existingDev);
+    }
+
 }
